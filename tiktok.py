@@ -77,9 +77,10 @@ def format_video_info(info):
     diggCount = info['stats']['diggCount']
     commentCount = info['stats']['commentCount']
     createTime = stamp2time(info['timeStamp'])
+    duration = info['duration']
     descArr = info['desc'].split("#")
     title = descArr[0]
-    res = [title.strip(), playCount, diggCount, commentCount, createTime]
+    res = [title.strip(), playCount, diggCount, commentCount, createTime, duration]
     tags = descArr[1:]
     for i in range(0, len(tags)):
         res.append(tags[i].strip())
@@ -91,7 +92,7 @@ def gen_output(videos):
     workbook = Workbook()
     worksheet = workbook.active
     worksheet.title = user_name
-    worksheet.append(['名称', '播放量', '点赞数', '评论数', '发布时间', '标签组'])
+    worksheet.append(['名称', '播放量', '点赞数', '评论数', '发布时间', '视频时长', '标签组'])
     for v in videos:
         worksheet.append(format_video_info(v))
     file_name = user_name + '-videos.xlsx'
